@@ -7911,7 +7911,7 @@ ast_interface_block::hir(exec_list *instructions,
                        "Interface block sets both readonly and writeonly");
    }
 
-   unsigned qual_stream;
+   unsigned qual_stream = 0;
    if (!process_qualifier_constant(state, &loc, "stream", this->layout.stream,
                                    &qual_stream) ||
        !validate_stream_qualifier(&loc, state, qual_stream)) {
@@ -7922,14 +7922,14 @@ ast_interface_block::hir(exec_list *instructions,
       return NULL;
    }
 
-   unsigned qual_xfb_buffer;
+   unsigned qual_xfb_buffer = 0;
    if (!process_qualifier_constant(state, &loc, "xfb_buffer",
                                    layout.xfb_buffer, &qual_xfb_buffer) ||
        !validate_xfb_buffer_qualifier(&loc, state, qual_xfb_buffer)) {
       return NULL;
    }
 
-   unsigned qual_xfb_offset;
+   unsigned qual_xfb_offset = 0;
    if (layout.flags.q.explicit_xfb_offset) {
       if (!process_qualifier_constant(state, &loc, "xfb_offset",
                                       layout.offset, &qual_xfb_offset)) {
@@ -7937,7 +7937,7 @@ ast_interface_block::hir(exec_list *instructions,
       }
    }
 
-   unsigned qual_xfb_stride;
+   unsigned qual_xfb_stride = 0;
    if (layout.flags.q.explicit_xfb_stride) {
       if (!process_qualifier_constant(state, &loc, "xfb_stride",
                                       layout.xfb_stride, &qual_xfb_stride)) {
